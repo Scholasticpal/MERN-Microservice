@@ -1,6 +1,10 @@
 //Load express
     const express = require("express")//import express
     const app = express(); //create express app instance
+    const bodyParser = require("body-parser"); //import body-parser
+
+    app.use(bodyParser.json()); //use body-parser as a middleware
+
 //Load Mongoose
     const mongoose = require("mongoose");//import mongoose
 
@@ -19,7 +23,8 @@ app.get('/', (req, res) => { //Main route of books application
 });
 
 //Create Books Functionality
-app.post('/books', (req,res)=>{
+app.post('/book', (req,res)=>{
+    console.log(req.body); //console log the data received from postman
     res.send("Tesing our book route");
 })
 
