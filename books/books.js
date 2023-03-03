@@ -8,6 +8,10 @@
 //Load Mongoose
     const mongoose = require("mongoose");//import mongoose
 
+    //Loading the model
+    require("./Book")
+    const Book = mongoose.model("ABook")
+
     //Connect
     // mongoose.connect("mongodb+srv://anmol:123456MERN@booksmicroservices.1h9wgv5.mongodb.net/?retryWrites=true&w=majority");
 
@@ -24,8 +28,25 @@ app.get('/', (req, res) => { //Main route of books application
 
 //Create Books Functionality
 app.post('/book', (req,res)=>{
-    console.log(req.body); //console log the data received from postman
-    res.send("Tesing our book route");
+    var newBook = {
+        title : req.body.title,
+        author : req.body.author,
+        numberPages : req.body.numberPages,
+        publisher : req.body.publisher
+    }
+
+    //Create a new book
+    var book = new Book(newBook);
+
+    book.save().then(()=>{
+        console.log("New Book Created");
+    }).catch((err)=>{
+        if (err){
+            throw err;
+        }
+    })
+
+    res.send("A new book has been created successfully");//to close request on postman
 })
 
 //open express server
