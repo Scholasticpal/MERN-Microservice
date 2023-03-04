@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 // We provide parameters to .model, name of model and definition of model
 //in definition of model we give attributes & fields of our books collection
 
-mongoose.model("ABook", {
+mongoose.model("Book", {
     //Title, author, numberPages, publisher
 
     title: {
