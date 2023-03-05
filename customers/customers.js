@@ -31,13 +31,19 @@ app.post("/customer", (req, res)=>{
             throw err;
         }
     })
-    
+
 })
 
-// A customer will have:
-// 1. Name
-// 2. Age
-// 3. Address
+//List all customers
+app.get("/customers", (req, res)=>{
+    Customer.find().then((customers)=>{
+        res.json(customers)
+    }).catch((err)=>{
+        if(err){
+            throw err;
+        }
+    })
+});
 
 app.listen("5555", ()=>{
     console.log("Server is running on port 5555 - Customer's Service");
