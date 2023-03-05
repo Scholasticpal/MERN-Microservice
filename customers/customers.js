@@ -25,7 +25,7 @@ app.post("/customer", (req, res)=>{
 
     var customer = new Customer(newCustomer);
     customer.save().then(()=>{
-        res.send("New Custoemer Created")
+        res.send("New Customer Created")
     }).catch((err)=>{
         if(err){
             throw err;
@@ -54,6 +54,17 @@ app.get("/customer/:id", (req, res)=>{
         else{
             res.send("Invalid Id Entered")
         }
+    }).catch((err)=>{
+        if(err){
+            throw err;
+        }
+    })
+})
+
+//Delete a customer by its ID
+app.delete("/customer/:id", (req, res)=>{
+    Customer.findByIdAndRemove(req.params.id).then(()=>{
+        res.send("Customer deleted Successfully")
     }).catch((err)=>{
         if(err){
             throw err;
