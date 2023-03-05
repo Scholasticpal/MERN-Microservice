@@ -45,6 +45,22 @@ app.get("/customers", (req, res)=>{
     })
 });
 
+//List a single Customer by its id
+app.get("/customer/:id", (req, res)=>{
+    Customer.findById(req.params.id).then((customer)=>{
+        if(customer){
+            res.json(customer)
+        }
+        else{
+            res.send("Invalid Id Entered")
+        }
+    }).catch((err)=>{
+        if(err){
+            throw err;
+        }
+    })
+})
+
 app.listen("5555", ()=>{
     console.log("Server is running on port 5555 - Customer's Service");
 })
